@@ -1,5 +1,5 @@
 {
-  "name": "market",
+  "name": "blockcore-market",
   "version": "0.0.1",
   "scripts": {
     "version": "node -p \"require('./package.json').version\""
