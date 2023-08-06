@@ -1,6 +1,6 @@
 {
   "name": "server",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "index.js",
   "scripts": {
     "start": "node index.mjs",
@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "format": "prettier --single-quote --check .",
     "prepare": "cd ../ && husky install server/.husky",
-    "dev": "nodemon --experimental-modules index.mjs"
+    "dev": "nodemon --experimental-modules index.mjs",
+    "version": "node -p \"require('./package.json').version\""
   },
   "dependencies": {
     "cors": "^2.8.5",
