@@ -2,7 +2,7 @@
   "name": "Blockcore Market",
   "short_name": "Market",
   "theme_color": "#4c895b",
-  "background_color": "#424242",
+  "background_color": "#303030",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

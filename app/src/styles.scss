@@ -1,4 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-size: 16px;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #303030;
+  color: white;
+  overscroll-behavior-y: contain;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+p {
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
+}
+
+.collection-card {
+  max-width: 400px;
+  margin-bottom: 1em;
+}
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+
+.page {
+  margin: 2em;
+}

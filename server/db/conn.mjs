@@ -1,9 +1,6 @@
 import { MongoClient } from "mongodb";
 
 const connectionString = process.env.MARKET_DATABASE || "";
-
-console.log(connectionString);
-
 const client = new MongoClient(connectionString);
 
 let conn;
