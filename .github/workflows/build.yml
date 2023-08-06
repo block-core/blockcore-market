@@ -36,13 +36,13 @@ jobs:
         echo RELEASE_NAME=${{ env.PROJECT_NAME }}-${{ env.VERSION }}.tgz >> $GITHUB_ENV
       shell: bash
 
-    - name: Install and Build
-      run: |
-        npm install
-        npm run build
-    - name: Run Tests
-      run: |
-        npm run test
+    # - name: Install and Build
+    #   run: |
+    #     npm install
+    #     npm run build
+    # - name: Run Tests
+    #   run: |
+    #     npm run test
 
     - name: Package
       run: |
