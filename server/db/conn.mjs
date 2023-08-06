@@ -1,13 +1,15 @@
 import { MongoClient } from "mongodb";
 
-const connectionString = process.env.ATLAS_URI || "";
+const connectionString = process.env.MARKET_DATABASE || "";
+
+console.log(connectionString);
 
 const client = new MongoClient(connectionString);
 
 let conn;
 try {
   conn = await client.connect();
-} catch(e) {
+} catch (e) {
   console.error(e);
 }
 
