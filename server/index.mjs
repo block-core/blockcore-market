@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.use("/posts", posts);
 
-app.use("/", express.static(path.join(__dirname, "../app/dist/app")));
+app.use("/", express.static(path.join(__dirname, "dist")));
 // app.get("/*", (req, res) => res.sendFile(path.join(__dirname)));
 
 app.use((err, _req, res, next) => {

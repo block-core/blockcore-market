@@ -36,6 +36,12 @@ jobs:
         tar -C ./src/ -xzvf ./artifacts/blockcore-market-${{ github.event.release.tag_name }}.tgz --strip-components=1
         ls -R
 
+    - name: Install and Build
+      working-directory: app
+      run: |
+        npm install
+        npm run build
+
     - name: Build the Docker container image
       run: docker build server/. -t blockcore/market:latest -t blockcore/market:${{ github.event.release.tag_name }}
 
