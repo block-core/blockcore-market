@@ -3,6 +3,7 @@ import cors from "cors";
 import "./loadEnvironment.mjs";
 import "express-async-errors";
 import posts from "./routes/posts.mjs";
+import collection from "./routes/collection.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -17,7 +18,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/posts", posts);
+app.use("/api/posts", posts);
+app.use("/api/collection", collection);
 
 app.use("/", express.static(path.join(__dirname, "dist")));
 // app.get("/*", (req, res) => res.sendFile(path.join(__dirname)));

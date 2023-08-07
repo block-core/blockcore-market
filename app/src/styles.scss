@@ -1,5 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "@angular/material/theming";
+
+@include mat-core();
+
+@import "./theme.scss";
+
+@import "./custom-component-themes.scss";
+
+@include angular-material-theme($theming-material-components-theme);
+@include custom-components-theme($theming-material-components-theme);
+
+// @import "@fontsource/roboto/400";
+// @import "@fontsource/roboto/500";
+// @import "@fontsource/roboto/700"; // default "bold".
+
+@import "@fontsource/material-icons";
+// @import "@fontsource/material-icons-rounded";
+// @import "@fontsource/material-icons-outlined";
+// @import "@fontsource/material-icons-sharp";
+// @import "@fontsource/material-icons-two-tone";
+
+.dark-theme {
+  @include angular-material-color($dark-theme);
+  @include custom-components-theme($dark-theme);
+}
+
 html,
 body {
   height: 100%;
@@ -35,4 +61,13 @@ p {
 
 .page {
   margin: 2em;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
