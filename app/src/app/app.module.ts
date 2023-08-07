@@ -11,6 +11,7 @@ import { CollectionComponent } from './collection/collection.component';
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [AppComponent, CollectionComponent, HomeComponent],
@@ -21,6 +22,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatSidenavModule,
     MatCardModule,
     MatGridListModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
