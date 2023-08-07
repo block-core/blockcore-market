@@ -21,6 +21,10 @@
   @include custom-components-theme($dark-theme);
 }
 
+:root {
+  --accent: #4c895b;
+}
+
 html,
 body {
   height: 100%;

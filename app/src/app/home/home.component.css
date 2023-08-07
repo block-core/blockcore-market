@@ -10,7 +10,8 @@
 }
 
 .category:hover {
-  color: gray;
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 .category span {
@@ -20,7 +21,7 @@
 .categories {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
+  gap: 18px;
 }
 
 @media (max-width: 760px) {
