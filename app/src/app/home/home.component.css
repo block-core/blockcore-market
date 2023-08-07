@@ -1,0 +1,25 @@
+.categories .mat-icon {
+  font-size: 4em;
+}
+
+.category {
+  display: inline-block;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+
+.category:hover {
+    color: gray;
+}
+
+
+.category span {
+  line-break: both;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
