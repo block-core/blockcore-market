@@ -10,9 +10,8 @@
 }
 
 .category:hover {
-    color: gray;
+  color: gray;
 }
-
 
 .category span {
   line-break: both;
@@ -20,6 +19,28 @@
 
 .categories {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
 }
+
+@media (max-width: 760px) {
+  .categories {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 240px) {
+    .categories {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+    }
+  }
+  
