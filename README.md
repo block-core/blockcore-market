@@ -10,7 +10,7 @@
   </p>
 </p>
 
-Blockcore Market is an app for posting offers for goods and services. Users are identified using their decentralized identifiers (Web5).
+Blockcore Market is an web app for posting offers for goods and services. Users are identified using their decentralized identifiers (Web5).
 
 ![](/assets/blockcore-market-screenshot.png)
 
