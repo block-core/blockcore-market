@@ -6,7 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  categories: any[] = [];
+
   constructor() {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    const nodeEndpoint = 'http://localhost:5050/api';
+    const collectionUrl = 'category/root';
+    const response = await fetch(`${nodeEndpoint}/${collectionUrl}`);
+
+    if (response.status >= 400) {
+      throw new Error(response.statusText);
+    }
+
+    const result = await response.json();
+    console.log(result);
+    this.categories = result;
+  }
 }

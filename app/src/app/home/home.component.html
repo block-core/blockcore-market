@@ -1,4 +1,17 @@
 <div class="categories">
+  <a
+    [routerLink]="['/category', category.slug]"
+    class="category"
+    *ngFor="let category of categories; let i = index"
+  >
+    <mat-icon inline="true">{{ category.icon }}</mat-icon
+    ><br />
+    <span>{{ category.name }}</span>
+  </a>
+</div>
+
+<!--
+<div class="categories">
   <a routerLink="/collection" class="category">
     <mat-icon inline="true">chair</mat-icon><br />
     <span>The Square</span>
@@ -10,7 +23,7 @@
   </a>
 
   <a routerLink="/collection" class="category">
-    <mat-icon inline="true">chair</mat-icon><br />
+    <mat-icon inline="true">directions_car</mat-icon><br />
     <span>Automotive</span>
   </a>
 
@@ -36,7 +49,7 @@
 
   <a routerLink="/collection" class="category">
     <mat-icon inline="true">emoji_transportation</mat-icon><br />
-    <span>Transporation</span>
+    <span>Transportation</span>
   </a>
 
   <a routerLink="/collection" class="category">
@@ -69,3 +82,4 @@
     <span>Car Rental</span>
   </a>
 </div>
+-->

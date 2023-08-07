@@ -12,9 +12,15 @@ import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
-  declarations: [AppComponent, CollectionComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    CollectionComponent,
+    HomeComponent,
+    CategoryComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
