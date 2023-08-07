@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-category',
@@ -7,20 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class CategoryComponent implements OnInit {
   collections: any[] = [];
 
-  constructor() {}
+  constructor(private apiService: ApiService) {}
 
   async ngOnInit() {
-    const nodeEndpoint = 'http://localhost:5050/api';
-    const collectionUrl = 'collection';
-    const response = await fetch(`${nodeEndpoint}/${collectionUrl}`);
-
-    if (response.status >= 400) {
-      throw new Error(response.statusText);
-    }
-
-    const result = await response.json();
-    console.log(result);
-    this.collections = result;
+    this.collections = await this.apiService.categories();
 
     // const rawResponse = await fetch(serviceUrl, {
     //   method: 'POST',

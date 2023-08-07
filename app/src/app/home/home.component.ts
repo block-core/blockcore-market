@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   categories: any[] = [];
 
-  constructor() {}
+  constructor(private apiService: ApiService) {}
 
   async ngOnInit() {
-    const nodeEndpoint = 'http://localhost:5050/api';
-    const collectionUrl = 'category/root';
-    const response = await fetch(`${nodeEndpoint}/${collectionUrl}`);
-
-    if (response.status >= 400) {
-      throw new Error(response.statusText);
-    }
-
-    const result = await response.json();
-    console.log(result);
-    this.categories = result;
+    this.categories = await this.apiService.categories();
   }
 }

@@ -39,7 +39,7 @@ jobs:
     - name: Install and Build
       working-directory: app
       run: |
-        npm install
+        npm ci
         npm run build
 
     - name: Build the Docker container image
