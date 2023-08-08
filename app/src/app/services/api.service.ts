@@ -42,6 +42,24 @@ export class ApiService {
   //   return result;
   // }
 
+  async insertCategory(item: any) {
+    const response = await fetch(`${environment.apiUrl}/category`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item),
+    });
+
+    if (response.status >= 400) {
+      throw new Error(response.statusText);
+    }
+
+    const result = await response.json();
+    return result.item;
+  }
+
   async updateCategory(id: string, item: any) {
     const response = await fetch(`${environment.apiUrl}/category/${id}`, {
       method: 'PUT',

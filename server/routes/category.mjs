@@ -60,9 +60,7 @@ router.post("/", async (req, res) => {
     // console.log(`insertOne with id ${insertedId} succeeded`);
     // result.humanId = insertedId;
 
-    res.status(204).send({
-      id: result.insertedId,
-    });
+    res.send({ result: result, item: newDocument });
   } catch (err) {
     console.log(err);
   }

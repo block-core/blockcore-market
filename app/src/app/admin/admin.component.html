@@ -10,6 +10,15 @@
   </button>
   <mat-card class="admin-card">
     <div class="grid-container">
+
+      <button
+      mat-raised-button
+      color="primary"
+      (click)="newCategory()"
+    >
+      New</button
+    >
+
       <div class="grid-item flex-container" *ngFor="let category of categories">
         <div class="flex-item-left">
           <mat-form-field class="full-width">
@@ -41,7 +50,11 @@
         </div>
         <div class="flex-item-right">
           &nbsp;
-          <button mat-raised-button color="primary" (click)="saveCategory(category)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="saveCategory(category)"
+          >
             Save</button
           >&nbsp;
           <button

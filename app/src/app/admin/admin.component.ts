@@ -22,18 +22,23 @@ export class AdminComponent implements OnInit {
     this.collections = await this.apiService.collections();
   }
 
+  newCategory() {
+    this.categories.push({ name: '' });
+  }
+
   async saveCategory(item: any) {
     const id = item._id;
     console.log(item);
-    const doc = await this.apiService.updateCategory(id, item);
-    const pos = this.categories.findIndex((el) => el._id === id);
 
-    this.categories[pos] = doc;
-
-    // this.categories[0];
-    // if (pos >= 0) {
-    //   this.categories.splice(pos, 1);
-    // }
+    if (id) {
+      const doc = await this.apiService.updateCategory(id, item);
+      const pos = this.categories.findIndex((el) => el._id === id);
+      this.categories[pos] = doc;
+    } else {
+      const doc = await this.apiService.insertCategory(item);
+      const pos = this.categories.findIndex((i) => i === item);
+      this.categories[pos] = doc;
+    }
   }
 
   async deleteCategory(id: string) {
