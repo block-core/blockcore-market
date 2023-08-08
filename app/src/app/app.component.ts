@@ -32,15 +32,9 @@ export class AppComponent {
   ) {}
 
   async ngOnInit() {
-    console.log('HOW OFTEN RUN??');
-
     // Verify if the user is already authenticated.
     if (!this.appState.authenticated) {
       const authenticated = await this.authService.authenticated();
-
-      console.log('RESULT FROM AUTHENTICATED:', authenticated);
-
-      debugger;
 
       if (authenticated && !authenticated.error) {
         this.appState.authenticated = true;
@@ -54,24 +48,6 @@ export class AppComponent {
     }
 
     this.loading = false;
-
-    // if (!this.appState.authenticated) {
-    //   const response = await fetch(
-    //     this.apiBaseUrl + '1.0/authenticate/protected',
-    //     {
-    //       method: 'GET',
-    //       headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //       },
-    //     }
-    //   );
-
-    //   if (response.status == 200) {
-    //     this.appState.authenticated = true;
-    //     this.router.navigateByUrl('/dashboard');
-    //   }
-    // }
   }
 
   async login() {
