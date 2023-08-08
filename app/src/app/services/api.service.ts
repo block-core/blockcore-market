@@ -30,4 +30,32 @@ export class ApiService {
     const result = await response.json();
     return result;
   }
+
+  // async deleteCategory() {
+  //   const response = await fetch(`${environment.apiUrl}/collection`);
+
+  //   if (response.status >= 400) {
+  //     throw new Error(response.statusText);
+  //   }
+
+  //   const result = await response.json();
+  //   return result;
+  // }
+
+  async deleteCategory(id: string) {
+    const response = await fetch(`${environment.apiUrl}/category/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.status >= 400) {
+      throw new Error(response.statusText);
+    }
+
+    const result = await response.json();
+    return result;
+  }
 }

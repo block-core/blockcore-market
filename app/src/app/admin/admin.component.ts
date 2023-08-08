@@ -21,4 +21,18 @@ export class AdminComponent implements OnInit {
   async loadCollections(type: string) {
     this.collections = await this.apiService.collections();
   }
+
+  async saveCategory(item: any) {
+    console.log(item);
+  }
+
+  async deleteCategory(id: string) {
+    console.log(id);
+    await this.apiService.deleteCategory(id);
+
+    const pos = this.categories.findIndex((el) => el._id === id);
+    if (pos >= 0) {
+      this.categories.splice(pos, 1);
+    }
+  }
 }
