@@ -37,8 +37,31 @@
     <mat-icon>code</mat-icon>
   </a>
 
-  <button (click)="login()" target="_blank" mat-icon-button title="Login">
+  <mat-spinner
+    *ngIf="loading"
+    class="loading-indicator"
+    color="accent"
+    diameter="24"
+  ></mat-spinner>
+
+  <button
+    *ngIf="!loading && !appState.authenticated"
+    (click)="login()"
+    target="_blank"
+    mat-icon-button
+    title="Login"
+  >
     <mat-icon>login</mat-icon>
+  </button>
+
+  <button
+    *ngIf="!loading && appState.authenticated"
+    (click)="logout()"
+    target="_blank"
+    mat-icon-button
+    title="Logout"
+  >
+    <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
 

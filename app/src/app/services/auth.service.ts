@@ -36,29 +36,31 @@ export class AuthService {
 
     const result = await response.json();
     return result;
+  }
 
-    //   // Provide the proof which will result in jwt being written as HttpOnly cookie.
-    //   const postResponse = await fetch(
-    //     `${environment.apiUrl}/authenticate`,
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify(challenge),
-    //     }
-    //   );
+  async authenticated() {
+    const response = await fetch(
+      `${environment.apiUrl}/authenticate/protected`
+    );
 
-    //   if (postResponse.status == 200) {
-    //     const content = await postResponse.json();
-    //     console.log('CONTENT FROM AUTH CALL:', content);
+    if (response.status == 200) {
+      const result = await response.json();
+
+      return result;
+    } else {
+      return null;
+    }
+  }
+
+  async logout() {
+    const response = await fetch(`${environment.apiUrl}/authenticate/logout`);
 
     // if (response.status >= 400) {
     //   throw new Error('Unable to receive authentication challenge.');
     // }
 
-    // const result = await response.json();
-    // return result;
+    const result = await response.json();
+    console.log('LOGOUT RESULT:', result);
+    return result;
   }
 }

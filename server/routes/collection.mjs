@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     let collection = await db.collection("collection");
     let results = await collection.find({}).limit(50).toArray();
 
-    res.send(results).status(200);
+    res.send(results);
   } catch (err) {
     console.log(err);
   }
@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
 router.get("/latest", async (req, res) => {
   let collection = await db.collection("collection");
   let results = await collection.aggregate([{ $project: { author: 1, title: 1, tags: 1, date: 1 } }, { $sort: { date: -1 } }, { $limit: 3 }]).toArray();
-  res.send(results).status(200);
+  res.send(results);
 });
 
 // Get a single post
@@ -30,11 +30,11 @@ router.get("/:id", async (req, res) => {
   let collection = await db.collection("collection");
 
   let query = { _id: MUUID.from(req.params.id) };
-//   let query = { _id: ObjectId(req.params.id) };
+  //   let query = { _id: ObjectId(req.params.id) };
   let result = await collection.findOne(query);
 
-  if (!result) res.send("Not found").status(404);
-  else res.send(result).status(200);
+  if (!result) res.status(404).send("Not found");
+  else res.send(result);
 });
 
 // Add a new document to the collection
@@ -54,11 +54,9 @@ router.post("/", async (req, res) => {
     // console.log(`insertOne with id ${insertedId} succeeded`);
     // result.humanId = insertedId;
 
-    res
-      .send({
-        id: result.insertedId,
-      })
-      .status(204);
+    res.status(204).send({
+      id: result.insertedId,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -67,7 +65,7 @@ router.post("/", async (req, res) => {
 // Update the post with a new comment
 router.patch("/item/:id", async (req, res) => {
   const query = { _id: MUUID.from(req.params.id) };
-//   const query = { _id: ObjectId(req.params.id) };
+  //   const query = { _id: ObjectId(req.params.id) };
 
   const updates = {
     $push: { comments: req.body },
@@ -76,7 +74,7 @@ router.patch("/item/:id", async (req, res) => {
   let collection = await db.collection("collection");
   let result = await collection.updateOne(query, updates);
 
-  res.send(result).status(200);
+  res.send(result);
 });
 
 // Delete an entry
@@ -87,7 +85,7 @@ router.delete("/:id", async (req, res) => {
   const collection = db.collection("collection");
   let result = await collection.deleteOne(query);
 
-  res.send(result).status(200);
+  res.send(result);
 });
 
 export default router;

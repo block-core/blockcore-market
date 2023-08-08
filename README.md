@@ -31,3 +31,7 @@ You also need an instance of MongoDB running on your local machine, preferbly th
 MARKET_DATABASE=mongodb://localhost:27017
 PORT=5050
 ```
+
+## Authentication on `localhost`
+
+If you want to use the authentication mechanism with cookies on localhost, you need to run production build of the UI and access the web app through the singular port that hosts both UI and API on same ports (5050).

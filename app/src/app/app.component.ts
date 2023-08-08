@@ -4,6 +4,7 @@ import { ApiService } from './services/api.service';
 import { WebProvider } from '@blockcore/provider';
 import { AuthService } from './services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ApplicationState } from './services/applicationstate.service';
 
 @Component({
   selector: 'app-root',
@@ -21,11 +22,53 @@ export class AppComponent {
 
   provider?: WebProvider;
 
+  loading = true;
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public appState: ApplicationState
   ) {}
+
+  async ngOnInit() {
+    console.log('HOW OFTEN RUN??');
+
+    // Verify if the user is already authenticated.
+    if (!this.appState.authenticated) {
+      const authenticated = await this.authService.authenticated();
+
+      console.log('RESULT FROM AUTHENTICATED:', authenticated);
+
+      if (authenticated && !authenticated.error) {
+        this.appState.authenticated = true;
+        this.appState.identity = authenticated.user.did;
+      } else {
+        this.appState.authenticated = false;
+        this.appState.identity = null;
+      }
+    }
+
+    this.loading = false;
+
+    // if (!this.appState.authenticated) {
+    //   const response = await fetch(
+    //     this.apiBaseUrl + '1.0/authenticate/protected',
+    //     {
+    //       method: 'GET',
+    //       headers: {
+    //         Accept: 'application/json',
+    //         'Content-Type': 'application/json',
+    //       },
+    //     }
+    //   );
+
+    //   if (response.status == 200) {
+    //     this.appState.authenticated = true;
+    //     this.router.navigateByUrl('/dashboard');
+    //   }
+    // }
+  }
 
   async login() {
     if (!this.provider) {
@@ -53,25 +96,13 @@ export class AppComponent {
       console.log('VERIFY:', verify);
 
       if (verify.error) {
+        this.appState.authenticated = false;
+        this.appState.identity = null;
         this.snackBar.open(verify.error, 'OK', { duration: 3000 });
+      } else {
+        this.appState.authenticated = true;
+        this.appState.identity = verify.user.did;
       }
-
-      // Provide the proof which will result in jwt being written as HttpOnly cookie.
-      // const postResponse = await fetch(
-      //   `${this.apiService.baseUrl()}/authenticate`,
-      //   {
-      //     method: 'POST',
-      //     headers: {
-      //       Accept: 'application/json',
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify(result.response),
-      //   }
-      // );
-
-      // if (postResponse.status == 200) {
-      //   const content = await postResponse.json();
-      //   console.log('CONTENT FROM AUTH CALL:', content);
 
       //   // const identity = new BlockcoreIdentity(null);
       //   // this.appState.identity = content.user.did;
@@ -118,6 +149,16 @@ export class AppComponent {
       // this.error = err.toString();
       console.error('Failed to authenticate.', err);
     }
+  }
+
+  async logout() {
+    this.loading = true;
+    await this.authService.logout();
+
+    this.appState.authenticated = false;
+    this.appState.identity = null;
+
+    this.loading = false;
   }
 
   async request(method: string, params?: object | unknown[]) {

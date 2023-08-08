@@ -18,6 +18,7 @@ const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 5050;
 const ADMINS = process.env['ADMIN']?.split(',').filter((i) => i.trim());
+const PRODUCTION = process.env['NODE_ENV'] === 'production';
 const KEY = process.env['JWT_KEY'];
 const app = express();
 
