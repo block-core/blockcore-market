@@ -3,12 +3,12 @@ import db from "../db/conn.mjs";
 import MUUID from "uuid-mongodb";
 
 const mUUID = MUUID.mode("relaxed"); // use relaxed mode
-
 const router = express.Router();
+const collectionName = "category";
 
 router.get("/", async (req, res) => {
   try {
-    let collection = await db.collection("category");
+    let collection = await db.collection(collectionName);
     let results = await collection.find({}).limit(50).toArray();
 
     res.send(results);
@@ -19,21 +19,21 @@ router.get("/", async (req, res) => {
 
 // Fetches the root categories
 router.get("/root", async (req, res) => {
-  let collection = await db.collection("category");
+  let collection = await db.collection(collectionName);
   let results = await collection.aggregate([{ $project: { name: 1, icon: 1, slug: 1, parent: 1, sort: 1 } }, { $sort: { sort: 1 } }, { $limit: 50 }]).toArray();
   res.send(results);
 });
 
 // Fetches the latest posts
 router.get("/latest", async (req, res) => {
-  let collection = await db.collection("category");
+  let collection = await db.collection(collectionName);
   let results = await collection.aggregate([{ $project: { author: 1, title: 1, tags: 1, date: 1 } }, { $sort: { date: -1 } }, { $limit: 3 }]).toArray();
   res.send(results);
 });
 
 // Get a single post
 router.get("/:id", async (req, res) => {
-  let collection = await db.collection("category");
+  let collection = await db.collection(collectionName);
 
   let query = { _id: MUUID.from(req.params.id) };
   //   let query = { _id: ObjectId(req.params.id) };
@@ -46,7 +46,7 @@ router.get("/:id", async (req, res) => {
 // Add a new document to the collection
 router.post("/", async (req, res) => {
   try {
-    let collection = await db.collection("category");
+    let collection = await db.collection(collectionName);
     let newDocument = req.body;
 
     // Ensure we don't have an id field. If we do, remove it.
@@ -62,6 +62,40 @@ router.post("/", async (req, res) => {
 
     res.status(204).send({
       id: result.insertedId,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// Add a new document to the collection
+router.put("/:id", async (req, res) => {
+  try {
+    let collection = await db.collection("category");
+
+    let query = { _id: MUUID.from(req.params.id) };
+    let result = await collection.findOne(query);
+
+    console.log("Searching for: ", req.params.id);
+
+    if (!result) res.status(404).send("Not found");
+
+    let updateDocument = req.body;
+
+    // Ensure we don't have an id field. If we do, remove it.
+    delete updateDocument.id;
+
+    // Ensure that users can't provide different ID in URL and within payload:
+    updateDocument._id = MUUID.from(req.params.id);
+
+    updateDocument.date = new Date();
+
+    const updateResult = await collection.updateOne(query, { $set: updateDocument });
+    console.log("Updated documents =>", updateResult);
+
+    res.send({
+      result: updateResult,
+      item: updateDocument,
     });
   } catch (err) {
     console.log(err);
