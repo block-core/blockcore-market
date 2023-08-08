@@ -57,14 +57,16 @@ router.post("/", async (req, res) => {
       did: req.body.did,
     };
 
-    if (!ADMINS?.includes(payload.did)) {
-      return res
-        .send({
-          status: "error",
-          error: "Unauthorized",
-        })
-        .status(401);
-    }
+    // if (!ADMINS?.includes(payload.did)) {
+    //   return res
+    //     .send({
+    //       status: "error",
+    //       error: "Unauthorized",
+    //     })
+    //     .status(401);
+    // }
+
+    const isAdmin = ADMINS?.includes(payload.did);
 
     const token = jwt.sign(payload, KEY, { expiresIn: "1h" });
 
@@ -93,6 +95,7 @@ router.post("/", async (req, res) => {
       success: true,
       user: {
         did: payload.did,
+        admin: isAdmin,
       },
     });
   } catch (err) {
@@ -128,13 +131,9 @@ router.get("/logout", async (req, res) => {
 });
 
 router.get("/protected", (req, res) => {
-  console.log("PROTECTED URL!");
-
   try {
     const { cookies } = req;
     const token = cookies.token;
-
-    console.log("TOKEN:", token);
 
     if (!token) {
       return res.status(401).send({
@@ -143,18 +142,23 @@ router.get("/protected", (req, res) => {
       });
     } else {
       try {
-        console.log("DECODING TOKEN!");
         // First let us verify the token.
         const decoded = jwt.verify(token, KEY);
-        console.log(decoded);
+        const isAdmin = ADMINS?.includes(decoded.did);
 
         return res.send({
           user: {
             did: decoded.did,
+            admin: isAdmin,
           },
         });
       } catch (err) {
         console.log(err);
+        // If the JWT has expired, the user is logged out.
+        return res.status(401).send({
+          status: "error",
+          error: "Unauthorized, JWT expired",
+        });
       }
     }
   } catch (err) {

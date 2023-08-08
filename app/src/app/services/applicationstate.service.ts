@@ -11,4 +11,6 @@ export class ApplicationState {
   short: any;
 
   authenticated: boolean = false;
+
+  admin = false;
 }

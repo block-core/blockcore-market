@@ -40,12 +40,16 @@ export class AppComponent {
 
       console.log('RESULT FROM AUTHENTICATED:', authenticated);
 
+      debugger;
+
       if (authenticated && !authenticated.error) {
         this.appState.authenticated = true;
         this.appState.identity = authenticated.user.did;
+        this.appState.admin = authenticated.user.admin;
       } else {
         this.appState.authenticated = false;
         this.appState.identity = null;
+        this.appState.admin = false;
       }
     }
 
@@ -97,11 +101,13 @@ export class AppComponent {
 
       if (verify.error) {
         this.appState.authenticated = false;
+        this.appState.admin = false;
         this.appState.identity = null;
         this.snackBar.open(verify.error, 'OK', { duration: 3000 });
       } else {
         this.appState.authenticated = true;
         this.appState.identity = verify.user.did;
+        this.appState.admin = verify.user.admin;
       }
 
       //   // const identity = new BlockcoreIdentity(null);
@@ -156,6 +162,7 @@ export class AppComponent {
     await this.authService.logout();
 
     this.appState.authenticated = false;
+    this.appState.admin = false;
     this.appState.identity = null;
 
     this.loading = false;

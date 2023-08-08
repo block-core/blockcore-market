@@ -28,6 +28,25 @@
     <mat-icon>share</mat-icon>
   </button> -->
 
+  <button
+    routerLink="/admin"
+    target="_blank"
+    mat-icon-button
+    title="Administration"
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
+
+  <button
+    *ngIf="!loading && appState.admin"
+    routerLink="/admin"
+    target="_blank"
+    mat-icon-button
+    title="Administration"
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
+
   <a
     href="https://github.com/block-core/blockcore-market"
     target="_blank"
