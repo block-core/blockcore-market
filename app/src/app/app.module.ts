@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CategoryComponent } from './category/category.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CategoryComponent } from './category/category.component';
     MatSidenavModule,
     MatCardModule,
     MatGridListModule,
+    MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

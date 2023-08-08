@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "@angular/service-worker": "^16.1.0",
+    "@blockcore/provider": "^0.0.13",
     "@fontsource-variable/material-symbols-rounded": "^5.0.7",
     "@fontsource/material-icons-round": "^5.0.7",
     "@fontsource/roboto": "^5.0.8",

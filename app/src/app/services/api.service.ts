@@ -5,6 +5,10 @@ import { environment } from '../../environments/environment';
 export class ApiService {
   constructor() {}
 
+  baseUrl() {
+    return environment.apiUrl;
+  }
+
   async categories() {
     const response = await fetch(`${environment.apiUrl}/category/root`);
 

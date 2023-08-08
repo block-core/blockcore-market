@@ -19,6 +19,7 @@ services:
       LETSENCRYPT_EMAIL: admin@blockcore.net
       MARKET_DATABASE: mongodb://market-db:27017
       PORT: 5050
+      ADMIN: '123,444'
     restart: unless-stopped
     depends_on:
       market-db:
