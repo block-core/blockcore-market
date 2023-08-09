@@ -41,6 +41,11 @@
             <input matInput [(ngModel)]="category.sort" />
           </mat-form-field>
 
+          <mat-form-field class="full-width">
+            <mat-label>Parent Category (ID)</mat-label>
+            <input matInput [(ngModel)]="category.parent" />
+          </mat-form-field>
+
           <mat-form-field class="json">
             <mat-label>JSON</mat-label>
             <textarea matInput rows="8" disabled="disabled">{{
