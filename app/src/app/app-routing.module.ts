@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { CollectionComponent } from './collection/collection.component';
 import { CategoryComponent } from './category/category.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
   },
   {
     path: '**',

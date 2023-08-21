@@ -29,6 +29,16 @@
   </button> -->
 
   <button
+    *ngIf="!loading && appState.authenticated"
+    routerLink="/profile"
+    target="_blank"
+    mat-icon-button
+    title="Profile"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <button
     *ngIf="!loading && appState.admin"
     routerLink="/admin"
     target="_blank"

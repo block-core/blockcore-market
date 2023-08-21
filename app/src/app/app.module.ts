@@ -23,6 +23,8 @@ import {
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ProfileComponent } from './profile/profile.component';
+import { YesPipe } from './services/yes.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     CategoryComponent,
     AdminComponent,
+    ProfileComponent,
+    YesPipe,
   ],
   imports: [
     BrowserModule,
