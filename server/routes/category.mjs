@@ -1,10 +1,12 @@
 import express from "express";
+import { ObjectId } from "mongodb";
 import db from "../db/conn.mjs";
 import MUUID from "uuid-mongodb";
 
 const mUUID = MUUID.mode("relaxed"); // use relaxed mode
 const router = express.Router();
 const collectionName = "category";
+import { verifyAdmin } from "../services/verifyAdmin.mjs";
 
 router.get("/", async (req, res) => {
   try {
@@ -45,6 +47,7 @@ router.get("/:id", async (req, res) => {
 
 // Add a new document to the collection
 router.post("/", async (req, res) => {
+  verifyAdmin(req, res);
   try {
     let collection = await db.collection(collectionName);
     let newDocument = req.body;
@@ -68,8 +71,9 @@ router.post("/", async (req, res) => {
 
 // Add a new document to the collection
 router.put("/:id", async (req, res) => {
+  verifyAdmin(req, res);
   try {
-    let collection = await db.collection("category");
+    let collection = await db.collection(collectionName);
 
     let query = { _id: MUUID.from(req.params.id) };
     let result = await collection.findOne(query);
@@ -102,6 +106,7 @@ router.put("/:id", async (req, res) => {
 
 // Update the post with a new comment
 router.patch("/item/:id", async (req, res) => {
+  verifyAdmin(req, res);
   const query = { _id: MUUID.from(req.params.id) };
   //   const query = { _id: ObjectId(req.params.id) };
 
@@ -109,7 +114,7 @@ router.patch("/item/:id", async (req, res) => {
     $push: { comments: req.body },
   };
 
-  let collection = await db.collection("category");
+  let collection = await db.collection(collectionName);
   let result = await collection.updateOne(query, updates);
 
   res.send(result);
@@ -117,13 +122,27 @@ router.patch("/item/:id", async (req, res) => {
 
 // Delete an entry
 router.delete("/:id", async (req, res) => {
-  const query = { _id: MUUID.from(req.params.id) };
-  //   const query = { _id: ObjectId(req.params.id) };
+  verifyAdmin(req, res);
+  try {
+    if (req.params.id.length > 32) {
+      const query = { _id: MUUID.from(req.params.id) };
+      //   const query = { _id: ObjectId(req.params.id) };
 
-  const collection = db.collection("category");
-  let result = await collection.deleteOne(query);
+      const collection = db.collection(collectionName);
+      let result = await collection.deleteOne(query);
 
-  res.send(result);
+      res.send(result);
+    } else {
+      const query = { _id: ObjectId(req.params.id) };
+
+      const collection = db.collection(collectionName);
+      let result = await collection.deleteOne(query);
+
+      res.send(result);
+    }
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 export default router;

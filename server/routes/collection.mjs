@@ -5,9 +5,11 @@ import MUUID from "uuid-mongodb";
 const mUUID = MUUID.mode("relaxed"); // use relaxed mode
 const router = express.Router();
 const collectionName = "collection";
+import { verifyAdmin } from "../services/verifyAdmin.mjs";
 
 // Get a list of 50 posts
 router.get("/", async (req, res) => {
+  
   try {
     let collection = await db.collection(collectionName);
     let results = await collection.find({}).limit(50).toArray();
@@ -27,6 +29,7 @@ router.get("/latest", async (req, res) => {
 
 // Add a new document to the collection
 router.post("/", async (req, res) => {
+  verifyAdmin(req, res);
   try {
     let collection = await db.collection(collectionName);
     let newDocument = req.body;
@@ -70,6 +73,7 @@ router.get("/:id", async (req, res) => {
 
 // Add a new document to the collection
 router.put("/:id", async (req, res) => {
+  verifyAdmin(req, res);
   try {
     let collection = await db.collection(collectionName);
 
@@ -104,6 +108,7 @@ router.put("/:id", async (req, res) => {
 
 // Update the post with a new comment
 router.patch("/item/:id", async (req, res) => {
+  verifyAdmin(req, res);
   const query = { _id: MUUID.from(req.params.id) };
   //   const query = { _id: ObjectId(req.params.id) };
 
@@ -119,6 +124,7 @@ router.patch("/item/:id", async (req, res) => {
 
 // Delete an entry
 router.delete("/:id", async (req, res) => {
+  verifyAdmin(req, res);
   const query = { _id: MUUID.from(req.params.id) };
   //   const query = { _id: ObjectId(req.params.id) };
 
