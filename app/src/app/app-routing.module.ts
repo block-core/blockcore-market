@@ -5,6 +5,7 @@ import { CollectionComponent } from './collection/collection.component';
 import { CategoryComponent } from './category/category.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CreateComponent } from './create/create.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+  },
+  {
+    path: 'create',
+    component: CreateComponent,
   },
   {
     path: '**',

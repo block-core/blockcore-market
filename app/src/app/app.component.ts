@@ -42,10 +42,9 @@ export class AppComponent {
         this.appState.authenticated = true;
         this.appState.identity = authenticated.user.did;
         this.appState.admin = authenticated.user.admin;
+        this.appState.approved = authenticated.user.approved;
       } else {
-        this.appState.authenticated = false;
-        this.appState.identity = null;
-        this.appState.admin = false;
+        this.appState.reset();
       }
     }
 
@@ -78,14 +77,13 @@ export class AppComponent {
       console.log('VERIFY:', verify);
 
       if (verify.error) {
-        this.appState.authenticated = false;
-        this.appState.admin = false;
-        this.appState.identity = null;
+        this.appState.reset();
         this.snackBar.open(verify.error, 'OK', { duration: 3000 });
       } else {
         this.appState.authenticated = true;
         this.appState.identity = verify.user.did;
         this.appState.admin = verify.user.admin;
+        this.appState.approved = verify.user.approved;
       }
 
       //   // const identity = new BlockcoreIdentity(null);

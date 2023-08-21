@@ -12,5 +12,14 @@ export class ApplicationState {
 
   authenticated: boolean = false;
 
+  approved: boolean = false;
+
   admin = false;
+
+  reset() {
+    this.identity = null;
+    this.authenticated = false;
+    this.admin = false;
+    this.approved = false;
+  }
 }

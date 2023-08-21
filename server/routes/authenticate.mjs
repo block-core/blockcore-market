@@ -68,6 +68,11 @@ router.post("/", async (req, res) => {
 
     const isAdmin = ADMINS?.includes(payload.did);
 
+    let collection = await db.collection("user");
+    let query = { did: payload.did };
+    let result = await collection.findOne(query);
+    const isApproved = result ? false : true;
+
     const token = jwt.sign(payload, KEY, { expiresIn: "1h" });
 
     let serialized;
@@ -96,6 +101,7 @@ router.post("/", async (req, res) => {
       user: {
         did: payload.did,
         admin: isAdmin,
+        approved: isApproved,
       },
     });
   } catch (err) {
@@ -130,7 +136,7 @@ router.get("/logout", async (req, res) => {
   });
 });
 
-router.get("/protected", (req, res) => {
+router.get("/protected", async (req, res) => {
   try {
     const { cookies } = req;
     const token = cookies.token;
@@ -146,10 +152,16 @@ router.get("/protected", (req, res) => {
         const decoded = jwt.verify(token, KEY);
         const isAdmin = ADMINS?.includes(decoded.did);
 
+        let collection = await db.collection("user");
+        let query = { did: decoded.did };
+        let result = await collection.findOne(query);
+        const isApproved = result ? false : true;
+
         return res.send({
           user: {
             did: decoded.did,
             admin: isAdmin,
+            approved: isApproved,
           },
         });
       } catch (err) {

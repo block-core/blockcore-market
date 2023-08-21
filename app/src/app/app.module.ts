@@ -25,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { YesPipe } from './services/yes.pipe';
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { YesPipe } from './services/yes.pipe';
     AdminComponent,
     ProfileComponent,
     YesPipe,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,

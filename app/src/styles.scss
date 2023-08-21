@@ -38,6 +38,14 @@ body {
   overscroll-behavior-y: contain;
 }
 
+a {
+  color: white;
+}
+
+a:visited {
+  color: white;
+}
+
 .mat-icon {
   font-family: "Material Icons Round", sans-serif;
 }
