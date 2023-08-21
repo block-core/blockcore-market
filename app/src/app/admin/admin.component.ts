@@ -58,4 +58,28 @@ export class AdminComponent implements OnInit {
       this.categories.splice(pos, 1);
     }
   }
+
+  async saveUser(item: any) {
+    const id = item._id;
+    console.log(item);
+
+    if (id) {
+      const doc = await this.apiService.updateUser(id, item);
+      const pos = this.categories.findIndex((el) => el._id === id);
+      this.categories[pos] = doc;
+    } else {
+      const doc = await this.apiService.insertUser(item);
+      const pos = this.categories.findIndex((i) => i === item);
+      this.categories[pos] = doc;
+    }
+  }
+
+  async deleteUser(id: string) {
+    await this.apiService.deleteUser(id);
+
+    const pos = this.categories.findIndex((el) => el._id === id);
+    if (pos >= 0) {
+      this.categories.splice(pos, 1);
+    }
+  }
 }

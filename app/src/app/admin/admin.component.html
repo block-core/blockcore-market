@@ -10,14 +10,9 @@
   </button>
   <mat-card class="admin-card">
     <div class="grid-container">
-
-      <button
-      mat-raised-button
-      color="primary"
-      (click)="newCategory()"
-    >
-      New</button
-    >
+      <button mat-raised-button color="primary" (click)="newCategory()">
+        New
+      </button>
 
       <div class="grid-item flex-container" *ngFor="let category of categories">
         <div class="flex-item-left">
@@ -86,21 +81,10 @@
     <div *ngFor="let collection of collections">{{ collection.name }}</div>
   </mat-card>
 
-
-
-  <button mat-raised-button (click)="loadUsers('user')">
-    Load Users
-  </button>
+  <button mat-raised-button (click)="loadUsers('user')">Load Users</button>
   <mat-card class="admin-card">
     <div class="grid-container">
-
-      <button
-      mat-raised-button
-      color="primary"
-      (click)="newUser()"
-    >
-      New</button
-    >
+      <button mat-raised-button color="primary" (click)="newUser()">New</button>
 
       <div class="grid-item flex-container" *ngFor="let item of users">
         <div class="flex-item-left">
@@ -110,23 +94,13 @@
           </mat-form-field>
 
           <mat-form-field class="full-width">
-            <mat-label>Slug</mat-label>
-            <input matInput [(ngModel)]="item.slug" />
+            <mat-label>Identifier</mat-label>
+            <input matInput [(ngModel)]="item.did" />
           </mat-form-field>
 
           <mat-form-field class="full-width">
-            <mat-label>Icon</mat-label>
-            <input matInput [(ngModel)]="item.icon" />
-          </mat-form-field>
-
-          <mat-form-field class="full-width">
-            <mat-label>Sort</mat-label>
-            <input matInput [(ngModel)]="item.sort" />
-          </mat-form-field>
-
-          <mat-form-field class="full-width">
-            <mat-label>Parent Category (ID)</mat-label>
-            <input matInput [(ngModel)]="item.parent" />
+            <mat-label>E-mail</mat-label>
+            <input matInput [(ngModel)]="item.email" />
           </mat-form-field>
 
           <mat-form-field class="json">
@@ -141,14 +115,14 @@
           <button
             mat-raised-button
             color="primary"
-            (click)="saveCategory(item)"
+            (click)="saveUser(item)"
           >
             Save</button
           >&nbsp;
           <button
             mat-raised-button
             color="warn"
-            (click)="deleteCategory(item._id)"
+            (click)="deleteUser(item._id)"
           >
             Delete
           </button>
@@ -160,8 +134,4 @@
       </div>
     </div>
   </mat-card>
-
-
-
-
 </div>
