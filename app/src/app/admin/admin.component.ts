@@ -9,6 +9,7 @@ import { ApiService } from '../services/api.service';
 export class AdminComponent implements OnInit {
   categories: any[] = [];
   collections: any[] = [];
+  users: any[] = [];
 
   constructor(private apiService: ApiService) {}
 
@@ -22,8 +23,16 @@ export class AdminComponent implements OnInit {
     this.collections = await this.apiService.collections();
   }
 
+  async loadUsers(type: string) {
+    this.categories = await this.apiService.users();
+  }
+
   newCategory() {
     this.categories.push({ name: '' });
+  }
+
+  newUser() {
+    this.users.push({ name: '' });
   }
 
   async saveCategory(item: any) {

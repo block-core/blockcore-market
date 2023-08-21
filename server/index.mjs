@@ -7,6 +7,7 @@ import posts from "./routes/posts.mjs";
 import collection from "./routes/collection.mjs";
 import category from "./routes/category.mjs";
 import authenticate from "./routes/authenticate.mjs";
+import user from "./routes/user.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 import cookie from 'cookie-parser';
@@ -40,6 +41,7 @@ app.use("/api/authenticate", authenticate);
 app.use("/api/posts", posts);
 app.use("/api/collection", collection);
 app.use("/api/category", category);
+app.use("/api/user", user);
 
 app.use("/", express.static(path.join(__dirname, "dist")));
 // app.get("/*", (req, res) => res.sendFile(path.join(__dirname)));

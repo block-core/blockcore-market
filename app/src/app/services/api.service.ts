@@ -31,6 +31,17 @@ export class ApiService {
     return result;
   }
 
+  async users() {
+    const response = await fetch(`${environment.apiUrl}/user`);
+
+    if (response.status >= 400) {
+      throw new Error(response.statusText);
+    }
+
+    const result = await response.json();
+    return result;
+  }
+
   // async deleteCategory() {
   //   const response = await fetch(`${environment.apiUrl}/collection`);
 
