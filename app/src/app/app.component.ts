@@ -5,6 +5,7 @@ import { WebProvider } from '@blockcore/provider';
 import { AuthService } from './services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ApplicationState } from './services/applicationstate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ export class AppComponent {
     private apiService: ApiService,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    public appState: ApplicationState
+    public appState: ApplicationState,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -142,6 +144,8 @@ export class AppComponent {
     this.appState.identity = null;
 
     this.loading = false;
+
+    this.router.navigateByUrl('/');
   }
 
   async request(method: string, params?: object | unknown[]) {

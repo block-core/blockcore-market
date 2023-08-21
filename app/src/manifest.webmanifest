@@ -1,11 +1,16 @@
 {
   "name": "Blockcore Market",
+  "version": "0.0.10",
+  "author": "Blockcore",
+  "description": "Peer to peer market app built on Web5",
+  "orientation": "any",
   "short_name": "Market",
   "theme_color": "#4c895b",
   "background_color": "#303030",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "categories": ["productivity"],
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",
