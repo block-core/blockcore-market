@@ -29,6 +29,15 @@
   </button> -->
 
   <button
+    routerLink="/create"
+    target="_blank"
+    mat-icon-button
+    title="New ad"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+
+  <button
     *ngIf="!loading && appState.approved"
     routerLink="/create"
     target="_blank"

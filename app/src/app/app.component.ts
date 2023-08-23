@@ -31,7 +31,14 @@ export class AppComponent {
     private snackBar: MatSnackBar,
     public appState: ApplicationState,
     private router: Router
-  ) {}
+  ) {
+    // Minor hack to avoid the flickering of the icons.
+    document.fonts.ready.then((fontFaceSet) => {
+      setTimeout(() => {
+        document.getElementById('waitScreen')!.style.display = 'none';
+      }, 0);
+    });
+  }
 
   async ngOnInit() {
     // Verify if the user is already authenticated.
