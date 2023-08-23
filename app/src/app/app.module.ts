@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { YesPipe } from './services/yes.pipe';
 import { CreateComponent } from './create/create.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { CreateComponent } from './create/create.component';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatRadioModule,
     MatProgressSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
