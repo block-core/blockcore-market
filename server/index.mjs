@@ -23,8 +23,8 @@ const PRODUCTION = process.env['NODE_ENV'] === 'production';
 const KEY = process.env['JWT_KEY'];
 const app = express();
 
-console.log('ADMINS:', ADMINS);
-console.log('KEY:', KEY);
+// console.log('ADMINS:', ADMINS);
+// console.log('KEY:', KEY);
 
 app.use(cors());
 app.use(express.json());
