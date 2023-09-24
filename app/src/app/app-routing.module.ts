@@ -6,6 +6,7 @@ import { CategoryComponent } from './category/category.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CreateComponent } from './create/create.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'collection',
     component: CollectionComponent,
+  },
+  {
+    path: 'map/:id',
+    component: MapComponent,
   },
   {
     path: 'category/:id',

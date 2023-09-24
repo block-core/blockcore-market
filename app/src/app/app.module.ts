@@ -28,6 +28,7 @@ import { YesPipe } from './services/yes.pipe';
 import { CreateComponent } from './create/create.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfileComponent,
     YesPipe,
     CreateComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

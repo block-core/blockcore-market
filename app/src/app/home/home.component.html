@@ -8,6 +8,11 @@
     ><br />
     <span>{{ category.name }}</span>
   </a>
+
+  <a [routerLink]="['/map', 'liberstad']" class="category">
+    <mat-icon inline="true">map</mat-icon><br />
+    <span>City Tiles</span>
+  </a>
 </div>
 
 <p class="remark">
@@ -17,7 +22,6 @@
     >source code</a
   >), use at your own risk. Data will be deleted and lost.
 </p>
-
 
 <!--
 <div class="categories">
